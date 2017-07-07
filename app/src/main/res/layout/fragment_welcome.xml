@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data class="WelcomeBinding"/>
+
+    <android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/primary_button_light">
+
+        <ImageView
+            android:id="@+id/icon_title"
+            android:layout_width="196dp"
+            android:layout_height="196dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/ic_kiwi_no_background"
+            app:layout_constraintBottom_toTopOf="@+id/greeting_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/greeting_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginLeft="32dp"
+            android:layout_marginStart="32dp"
+            android:text="@string/greeting_title"
+            android:textAppearance="@style/Text.Title"
+            app:layout_constraintBottom_toTopOf="@+id/greeting_message"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/greeting_message"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginRight="32dp"
+            android:text="@string/greeting_message"
+            android:textAppearance="@style/Text.Subtitle"
+            app:layout_constraintBottom_toTopOf="@+id/button_signin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/greeting_title"/>
+
+        <Button
+            android:id="@+id/button_signin"
+            style="@style/Button.PrimaryDark"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_xlarge"
+            android:drawableLeft="@drawable/ic_twitter"
+            android:drawableStart="@drawable/ic_twitter"
+            android:paddingLeft="@dimen/padding_default"
+            android:paddingStart="@dimen/padding_default"
+            android:text="@string/action_sign_in"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/greeting_message"
+            app:layout_constraintStart_toStartOf="@+id/greeting_message"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

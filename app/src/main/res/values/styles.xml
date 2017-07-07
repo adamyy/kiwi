@@ -1,0 +1,87 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
+        <item name="android:windowActionBarOverlay">true</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <style name="Toolbar" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:background">@color/white</item>
+        <item name="android:homeAsUpIndicator">@drawable/ic_arrow_back</item>
+        <item name="homeAsUpIndicator">@drawable/ic_arrow_back</item>
+        <item name="colorControlActivated">@color/kiwi_green</item>
+    </style>
+
+    <style name="Text"/>
+
+    <style name="Text.Toolbar" parent="Text">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_normal</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:layout_marginLeft">@dimen/margin_default</item>
+        <item name="android:layout_marginRight">@dimen/margin_default</item>
+    </style>
+
+    <style name="Text.Title" parent="Text">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_title</item>
+        <item name="android:fontFamily">@font/roboto_thin</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Text.Subtitle" parent="Text">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_subtitle</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="Button"/>
+
+    <style name="Button.Primary" parent="Button">
+        <item name="android:background">@drawable/ripple_background</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_button</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="Button.PrimaryDark" parent="Button">
+        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">@dimen/text_button</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+    </style>
+
+    <style name="Button.Text" parent="Button">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textSize">@dimen/text_normal</item>
+        <item name="android:fontFamily">@font/roboto_light</item>
+    </style>
+
+    <!--widget-->
+    <style name="TextInputLayout">
+        <item name="hintTextAppearance">@style/TextFloatLabelAppearance</item>
+        <item name="errorTextAppearance">@style/TextErrorAppearance</item>
+        <item name="counterTextAppearance">@style/TextAppearance.Design.Counter</item>
+        <item name="counterOverflowTextAppearance">@style/TextAppearance.Design.Counter.Overflow</item>
+    </style>
+
+    <style name="TextFloatLabelAppearance" parent="TextAppearance.Design.Hint">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TextErrorAppearance" parent="TextAppearance.Design.Error">
+        <item name="android:textColor">@color/red</item>
+    </style>
+
+    <style name="CircularProgress" parent="Widget.AppCompat.ProgressBar">
+    </style>
+
+</resources>

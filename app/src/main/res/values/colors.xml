@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">@color/kiwi_green</color>
+    <color name="colorPrimaryDark">@color/kiwi_green_dark</color>
+    <color name="colorAccent">@color/twitter_blue</color>
+
+    <color name="kiwi_green">#B1C64C</color>
+    <color name="kiwi_green_dark">#768e01</color>
+    <color name="kiwi_green_light">#D4E876</color>
+    <color name="kiwi_yellow">#F6DB00</color>
+    <color name="twitter_blue">#1da1f2</color>
+
+    <color name="error">@color/red</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="red">#FF5D5D</color>
+    <color name="green">#768e01</color>
+
+    <color name="failure">@color/red</color>
+    <color name="success">@color/green</color>
+
+
+</resources>
