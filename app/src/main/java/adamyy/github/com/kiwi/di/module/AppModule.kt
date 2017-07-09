@@ -7,10 +7,10 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module(subcomponents = arrayOf(AuthSubComponent::class))
-class AppModule(private val app: KiwiApplication) {
+class AppModule {
 
     @Provides
     @Singleton
-    fun provideApplicationContext() = app
+    fun provideApplicationContext(app: KiwiApplication) = app
 
 }

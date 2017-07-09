@@ -1,5 +1,6 @@
 package adamyy.github.com.kiwi
 
+import adamyy.github.com.kiwi.di.component.DaggerAppComponent
 import android.app.Application
 import android.support.v4.app.Fragment
 import com.squareup.leakcanary.LeakCanary
@@ -20,6 +21,10 @@ class KiwiApplication: Application(), HasSupportFragmentInjector{
         super.onCreate()
         if (LeakCanary.isInAnalyzerProcess(this)) return
         LeakCanary.install(this)
+        DaggerAppComponent.builder()
+                .application(this)
+                .build()
+                .inject(this)
     }
 
 }
