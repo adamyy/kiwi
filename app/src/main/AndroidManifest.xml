@@ -19,12 +19,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="adamyy.github.com.kiwi.ui.screens.home.HomeActivity"
+            android:name="adamyy.github.com.kiwi.ui.features.home.HomeActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-            android:name="adamyy.github.com.kiwi.ui.screens.login.LoginActivity"
+            android:name="adamyy.github.com.kiwi.ui.features.login.LoginActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

@@ -1,13 +1,12 @@
-package adamyy.github.com.kiwi.ui.screens.home
+package adamyy.github.com.kiwi.ui.features.home
 
 import adamyy.github.com.kiwi.R
 import adamyy.github.com.kiwi.data.source.network.UserApi
 import adamyy.github.com.kiwi.data.source.preferences.AuthPref
 import adamyy.github.com.kiwi.data.source.preferences.KiwiPreferences
 import adamyy.github.com.kiwi.databinding.TimelineBinding
-import adamyy.github.com.kiwi.ui.screens.base.BaseKiwiFragment
+import adamyy.github.com.kiwi.ui.base.BaseKiwiFragment
 import android.util.Log
-import com.bumptech.glide.Glide
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -29,7 +28,6 @@ class TimelineFragment : BaseKiwiFragment<TimelineBinding>() {
                 .subscribe(
                         { result ->
                             Log.d(TAG, result.toString())
-                            loadImage(result.profileImageUrl)
                             binding.textView.text = "Welcome! ${result.name}"
                         },
                         { error ->
@@ -40,12 +38,5 @@ class TimelineFragment : BaseKiwiFragment<TimelineBinding>() {
                         }
                 )
     }
-
-    private fun loadImage(url: String) {
-        Glide.with(this)
-                .load(url)
-                .into(binding.imageView)
-    }
-
 
 }

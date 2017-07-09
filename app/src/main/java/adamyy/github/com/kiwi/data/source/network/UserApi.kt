@@ -1,5 +1,6 @@
 package adamyy.github.com.kiwi.data.source.network
 
+import adamyy.github.com.kiwi.data.entity.AccessToken
 import adamyy.github.com.kiwi.data.entity.User
 import io.reactivex.Observable
 import okhttp3.OkHttpClient
@@ -10,10 +11,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 import se.akerfeldt.okhttp.signpost.OkHttpOAuthConsumer
-import se.akerfeldt.okhttp.signpost.SigningInterceptor
-import twitter4j.auth.AccessToken
 
-interface UserApi{
+interface UserApi {
 
     @GET("users/show.json")
     fun getUserById(
@@ -36,16 +35,16 @@ interface UserApi{
 
     companion object {
         fun create(accessToken: AccessToken): UserApi {
-            val consumer = OkHttpOAuthConsumer(BaseApi.CONSUMER_KEY, BaseApi.CONSUMER_SECRET)
+            val consumer = OkHttpOAuthConsumer(TwitterApiConstant.CONSUMER_KEY, TwitterApiConstant.CONSUMER_SECRET)
             consumer.setTokenWithSecret(accessToken.token, accessToken.tokenSecret)
 
             val okClient = OkHttpClient.Builder()
                     .addInterceptor(HttpLoggingInterceptor())
-                    .addInterceptor(SigningInterceptor(consumer))
+                    .addInterceptor(TwitterOAuthInterceptor(consumer))
                     .build()
 
             return Retrofit.Builder()
-                    .baseUrl(BaseApi.BASE_URL)
+                    .baseUrl(TwitterApiConstant.BASE_URL)
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(okClient)

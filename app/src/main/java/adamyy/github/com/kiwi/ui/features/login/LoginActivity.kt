@@ -1,10 +1,10 @@
-package adamyy.github.com.kiwi.ui.screens.login
+package adamyy.github.com.kiwi.ui.features.login
 
 import adamyy.github.com.kiwi.R
-import adamyy.github.com.kiwi.ui.screens.base.BaseKiwiActivity
+import adamyy.github.com.kiwi.ui.base.BaseKiwiActivity
 import adamyy.github.com.kiwi.databinding.BasicBinding
 import adamyy.github.com.kiwi.ui.common.action
-import adamyy.github.com.kiwi.ui.screens.home.HomeActivity
+import adamyy.github.com.kiwi.ui.features.home.HomeActivity
 import android.content.Intent
 import android.support.design.widget.Snackbar
 

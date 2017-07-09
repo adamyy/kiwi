@@ -1,4 +1,4 @@
-package adamyy.github.com.kiwi.ui.screens.base
+package adamyy.github.com.kiwi.ui.base
 
 import android.app.Dialog
 import android.graphics.Color

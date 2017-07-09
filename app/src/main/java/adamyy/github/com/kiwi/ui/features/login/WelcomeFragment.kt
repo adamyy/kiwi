@@ -1,7 +1,7 @@
-package adamyy.github.com.kiwi.ui.screens.login
+package adamyy.github.com.kiwi.ui.features.login
 
 import adamyy.github.com.kiwi.R
-import adamyy.github.com.kiwi.ui.screens.base.BaseKiwiFragment
+import adamyy.github.com.kiwi.ui.base.BaseKiwiFragment
 import adamyy.github.com.kiwi.databinding.WelcomeBinding
 import com.jakewharton.rxbinding2.view.RxView
 import java.util.concurrent.TimeUnit

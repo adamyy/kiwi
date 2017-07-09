@@ -1,20 +1,20 @@
-package adamyy.github.com.kiwi.ui.screens.login
+package adamyy.github.com.kiwi.ui.features.login
 
 import adamyy.github.com.kiwi.R
+import adamyy.github.com.kiwi.data.entity.AccessToken
+import adamyy.github.com.kiwi.data.entity.RequestToken
 import adamyy.github.com.kiwi.data.source.preferences.AuthPref
 import adamyy.github.com.kiwi.data.source.preferences.KiwiPreferences
 import adamyy.github.com.kiwi.data.repository.AuthRepository
-import adamyy.github.com.kiwi.data.repository.AuthenticationUrl
 import adamyy.github.com.kiwi.data.repository.TwitterAuthRepository
 import adamyy.github.com.kiwi.ui.common.SingleUIModel
-import adamyy.github.com.kiwi.ui.screens.base.UrlFragment
+import adamyy.github.com.kiwi.ui.base.UrlFragment
 import android.net.Uri
 import android.support.annotation.StringRes
 import android.util.Log
 import android.webkit.WebView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import twitter4j.auth.AccessToken
 
 class AuthFragment : UrlFragment() {
 
@@ -32,7 +32,7 @@ class AuthFragment : UrlFragment() {
 
     override fun initUi() {
         super.initUi()
-        loadAuthenticationUrl()
+        loadAuthentication()
     }
 
     // region UrlFragment
@@ -40,8 +40,7 @@ class AuthFragment : UrlFragment() {
     override fun onOverrideUrlLoading(view: WebView, url: Uri): Boolean {
         if (url.toString().startsWith(getString(R.string.twitter_api_callback_url))) {
             showLoading(true)
-            prefs.putVerifier(url.getQueryParameter(getString(R.string.oauth_verifier)))
-            loadAccessToken()
+            loadAccessToken(url.getQueryParameter(getString(R.string.oauth_verifier)))
             return true
         } else {
             return false
@@ -59,13 +58,13 @@ class AuthFragment : UrlFragment() {
 
     // endregion
 
-    private fun loadAuthenticationUrl() {
+    private fun loadAuthentication() {
         addDisposable(authRepo.getOAuthRequestToken()
                 .map {
                     (inFlight, isSuccess, data, error) ->
-                    if (inFlight) SingleUIModel.inProgress<AuthenticationUrl>()
-                    else if (isSuccess) SingleUIModel.success(data!!.authenticationURL)
-                    else SingleUIModel.failure<AuthenticationUrl>(error!!)
+                    if (inFlight) SingleUIModel.inProgress<RequestToken>()
+                    else if (isSuccess) SingleUIModel.success(data)
+                    else SingleUIModel.failure<RequestToken>(error!!)
                 }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -75,25 +74,27 @@ class AuthFragment : UrlFragment() {
                                 showLoading(true)
                             } else {
                                 if (isSuccess) {
-                                    loadUrlWithTimeout(result!!)
+                                    Log.d(TAG, result.toString())
+                                    loadUrlWithTimeout(result!!.authenticationUrl)
                                 } else {
                                     showLoading(false)
                                     getDelegate().onAuthFailed()
                                 }
                             }
                         },
-                        { error: Throwable? ->
-                            error?.printStackTrace()
+                        { error ->
+                            error.printStackTrace()
                             getDelegate().onAuthFailed()
                         },
                         {
-                            Log.d(TAG, "completed")
+                            Log.d(TAG, "request token completed")
                         }
-                ))
+                )
+        )
     }
 
-    private fun loadAccessToken() {
-        addDisposable(authRepo.getOAuthAccessToken()
+    private fun loadAccessToken(verifier: String) {
+        addDisposable(authRepo.getOAuthAccessToken(verifier)
                 .map {
                     (inFlight, isSuccess, data, error) ->
                     if (inFlight) SingleUIModel.inProgress<AccessToken>()

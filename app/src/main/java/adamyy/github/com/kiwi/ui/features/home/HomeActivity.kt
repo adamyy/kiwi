@@ -1,7 +1,7 @@
-package adamyy.github.com.kiwi.ui.screens.home
+package adamyy.github.com.kiwi.ui.features.home
 
 import adamyy.github.com.kiwi.R
-import adamyy.github.com.kiwi.ui.screens.base.BaseKiwiActivity
+import adamyy.github.com.kiwi.ui.base.BaseKiwiActivity
 import adamyy.github.com.kiwi.databinding.HomeBinding
 import android.support.design.widget.BottomNavigationView
 

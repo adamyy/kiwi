@@ -1,15 +1,13 @@
 package adamyy.github.com.kiwi.data.repository
 
 import adamyy.github.com.kiwi.data.common.SingleResult
+import adamyy.github.com.kiwi.data.entity.AccessToken
+import adamyy.github.com.kiwi.data.entity.RequestToken
 import io.reactivex.Observable
-import twitter4j.auth.AccessToken
-import twitter4j.auth.RequestToken
 
 interface AuthRepository {
 
     fun getOAuthRequestToken(): Observable<SingleResult<RequestToken>>
 
-    fun getOAuthAccessToken(): Observable<SingleResult<AccessToken>>
+    fun getOAuthAccessToken(verifier: String): Observable<SingleResult<AccessToken>>
 }
-
-typealias AuthenticationUrl = String

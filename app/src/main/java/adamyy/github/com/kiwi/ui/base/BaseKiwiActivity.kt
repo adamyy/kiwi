@@ -1,4 +1,4 @@
-package adamyy.github.com.kiwi.ui.screens.base
+package adamyy.github.com.kiwi.ui.base
 
 import adamyy.github.com.kiwi.R
 import adamyy.github.com.kiwi.ui.common.snack
