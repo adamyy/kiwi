@@ -3,18 +3,17 @@ package adamyy.github.com.kiwi.ui.features.login
 import adamyy.github.com.kiwi.R
 import adamyy.github.com.kiwi.data.entity.AccessToken
 import adamyy.github.com.kiwi.data.entity.RequestToken
-import adamyy.github.com.kiwi.data.source.preferences.AuthPref
-import adamyy.github.com.kiwi.data.source.preferences.KiwiPreferences
 import adamyy.github.com.kiwi.data.repository.AuthRepository
-import adamyy.github.com.kiwi.data.repository.TwitterAuthRepository
 import adamyy.github.com.kiwi.ui.common.SingleUIModel
 import adamyy.github.com.kiwi.ui.base.UrlFragment
+import android.content.Context
 import android.net.Uri
 import android.support.annotation.StringRes
 import android.util.Log
 import android.webkit.WebView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 class AuthFragment : UrlFragment() {
 
@@ -27,8 +26,12 @@ class AuthFragment : UrlFragment() {
         }
     }
 
-    val authRepo: AuthRepository by lazy { TwitterAuthRepository(context) }
-    val prefs: AuthPref by lazy { KiwiPreferences(context) }
+    @Inject lateinit var authRepo: AuthRepository
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+
+    }
 
     override fun initUi() {
         super.initUi()
@@ -38,12 +41,27 @@ class AuthFragment : UrlFragment() {
     // region UrlFragment
 
     override fun onOverrideUrlLoading(view: WebView, url: Uri): Boolean {
+        // TODO https://github.com/adamyy/kiwi/auth/?denied=06_XJAAAAAAA03y1AAABXUQJANc
         if (url.toString().startsWith(getString(R.string.twitter_api_callback_url))) {
-            showLoading(true)
-            loadAccessToken(url.getQueryParameter(getString(R.string.oauth_verifier)))
+            handleAuth(url)
             return true
         } else {
             return false
+        }
+    }
+
+    private fun handleAuth(url: Uri) {
+        val denied = url.getQueryParameter(getString(R.string.oauth_denied))
+        val verifier = url.getQueryParameter(getString(R.string.oauth_verifier))
+
+        if (denied != null) { // auth denied
+            showLoading(false)
+            getDelegate().onAuthFailed()
+        } else if (verifier != null) { // auth granted
+            showLoading(true)
+            loadAccessToken(verifier)
+        } else { // unknown error
+            getDelegate().onAuthFailed()
         }
     }
 
@@ -98,7 +116,7 @@ class AuthFragment : UrlFragment() {
                 .map {
                     (inFlight, isSuccess, data, error) ->
                     if (inFlight) SingleUIModel.inProgress<AccessToken>()
-                    else if (isSuccess) SingleUIModel.success(data!!)
+                    else if (isSuccess) SingleUIModel.success(data)
                     else SingleUIModel.failure(error!!)
                 }
                 .subscribeOn(Schedulers.io())
@@ -110,7 +128,6 @@ class AuthFragment : UrlFragment() {
                             } else {
                                 Log.d(TAG, "AccessToken: $result")
                                 if (isSuccess) {
-                                    prefs.putAccessToken(result)
                                     getDelegate().onAuthSuccess()
                                 } else {
                                     showLoading(false)

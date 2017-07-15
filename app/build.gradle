@@ -38,7 +38,7 @@ ext {
     okhttpVersion = "3.8.1"
     supportLibVersion = "25.4.0"
     archVersion = "1.0.0-alpha3"
-    roomVersion = "1.0.0-alpha3"
+    roomVersion = "1.0.0-alpha4"
     retrofitVersion = "2.3.0"
     rxAndroidVersion = "2.0.1"
     rxBindingVersion = "2.0.0"
@@ -68,9 +68,9 @@ dependencies {
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
 
     // arch
-    compile "android.arch.lifecycle:runtime:$archVersion"
-    compile "android.arch.lifecycle:extensions:$archVersion"
-    kapt "android.arch.lifecycle:compiler:$archVersion"
+//    compile "android.arch.lifecycle:runtime:$archVersion"
+//    compile "android.arch.lifecycle:extensions:$archVersion"
+//    kapt "android.arch.lifecycle:compiler:$archVersion"
     compile "android.arch.persistence.room:runtime:$roomVersion"
     kapt "android.arch.persistence.room:compiler:$roomVersion"
     compile "android.arch.persistence.room:rxjava2:$roomVersion"

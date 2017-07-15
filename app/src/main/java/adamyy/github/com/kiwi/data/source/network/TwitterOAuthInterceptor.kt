@@ -39,16 +39,17 @@ class TwitterOAuthInterceptor(val consumer: OkHttpOAuthConsumer) : Interceptor {
 
     private fun scanOAuthTokenResponse(response: Response): Response {
         fun scanPlainTextToJson(): Response {
-            val responseParams = response.body()!!.string().split("&")
+            val body = response.body() ?: return response // if body is null then just return the response
+            val responseParams = body.string().split("&")
             val json = JSONObject()
             responseParams.map {
                 Pair(it.substringBefore("="), it.substringAfter("="))
-            }.forEach {
-                json.put(it.first, it.second)
-                if (it.first == PARAM_TOKEN) {
-                    consumer.setTokenWithSecret(it.second, consumer.tokenSecret)
-                } else if (it.first == PARAM_SECRET) {
-                    consumer.setTokenWithSecret(consumer.token, it.second)
+            }.forEach { (name, value) ->
+                json.put(name, value)
+                if (name == PARAM_TOKEN) {
+                    consumer.setTokenWithSecret(value, consumer.tokenSecret)
+                } else if (name == PARAM_SECRET) {
+                    consumer.setTokenWithSecret(consumer.token, value)
                 }
             }
             return response.newBuilder()

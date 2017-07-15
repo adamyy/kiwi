@@ -3,12 +3,12 @@ package adamyy.github.com.kiwi.ui.features.home
 import adamyy.github.com.kiwi.R
 import adamyy.github.com.kiwi.data.source.network.UserApi
 import adamyy.github.com.kiwi.data.source.preferences.AuthPref
-import adamyy.github.com.kiwi.data.source.preferences.KiwiPreferences
 import adamyy.github.com.kiwi.databinding.TimelineBinding
 import adamyy.github.com.kiwi.ui.base.BaseKiwiFragment
 import android.util.Log
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 class TimelineFragment : BaseKiwiFragment<TimelineBinding>() {
 
@@ -18,8 +18,7 @@ class TimelineFragment : BaseKiwiFragment<TimelineBinding>() {
 
     override fun getLayoutRes(): Int = R.layout.fragment_timeline
 
-    val prefs: AuthPref by lazy { KiwiPreferences(context) }
-    val userApi: UserApi by lazy { UserApi.create(prefs.getAccessToken()!!) }
+    @Inject lateinit var userApi: UserApi
 
     override fun initUi() {
         userApi.verifyCredentials()

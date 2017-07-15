@@ -25,6 +25,7 @@
     <string name="retry">Retry</string>
 
     <!--oauth-->
+    <string name="oauth_denied">oauth_denied</string>
     <string name="oauth_verifier">oauth_verifier</string>
     <string name="oauth_token">oauth_token</string>
 

@@ -1,6 +1,5 @@
 package adamyy.github.com.kiwi.data.entity
 
-import android.support.annotation.BoolRes
 import com.google.gson.annotations.SerializedName
 
 /**

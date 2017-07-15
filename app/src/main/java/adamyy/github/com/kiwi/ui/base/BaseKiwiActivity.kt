@@ -2,15 +2,15 @@ package adamyy.github.com.kiwi.ui.base
 
 import adamyy.github.com.kiwi.R
 import adamyy.github.com.kiwi.ui.common.snack
-import android.arch.lifecycle.LifecycleActivity
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.os.Bundle
 import android.support.annotation.LayoutRes
 import android.support.annotation.StringRes
 import android.support.design.widget.Snackbar
+import android.support.v4.app.FragmentActivity
 
-abstract class BaseKiwiActivity<T: ViewDataBinding>: LifecycleActivity() {
+abstract class BaseKiwiActivity<T: ViewDataBinding>: FragmentActivity() {
 
     var fullScreenDialog: FullScreenDialogFragment? = null
 
@@ -48,8 +48,5 @@ abstract class BaseKiwiActivity<T: ViewDataBinding>: LifecycleActivity() {
 
     open @LayoutRes fun getLayoutRes(): Int = R.layout.activity_basic
 
-    /**
-     * Called in
-     */
     abstract fun initUi(): Unit
 }

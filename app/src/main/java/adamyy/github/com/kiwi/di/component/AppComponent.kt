@@ -1,9 +1,7 @@
 package adamyy.github.com.kiwi.di.component
 
 import adamyy.github.com.kiwi.KiwiApplication
-import adamyy.github.com.kiwi.di.module.AppModule
-import adamyy.github.com.kiwi.di.module.BuildersModule
-import adamyy.github.com.kiwi.di.module.NetworkModule
+import adamyy.github.com.kiwi.di.module.*
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
@@ -11,10 +9,12 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = arrayOf(
-        NetworkModule::class,
-        AppModule::class,
         AndroidSupportInjectionModule::class,
-        BuildersModule::class
+        AppModule::class,
+        BuildersModule::class,
+        NetworkModule::class,
+        PrefsModule::class,
+        RepositoryModule::class
 ))
 interface AppComponent {
 

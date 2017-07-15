@@ -7,24 +7,22 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
 
-class KiwiPreferences(context: Context) : AuthPref {
+class KiwiPreferences(
+        private val prefs: SharedPreferences,
+        private val gson: Gson
+) : AuthPref {
 
     companion object {
         val TAG = KiwiPreferences::class.simpleName
-        val NAME = "kiwi_preferences"
     }
 
-    private val prefs: SharedPreferences by lazy {
-        context.getSharedPreferences(NAME, Context.MODE_PRIVATE)
-    }
-
-    private val gson: Gson by lazy { Gson() }
-
-    // BasePref
+    // region BasePref
 
     override fun contains(key: String): Boolean = prefs.contains(key)
 
-    // AuthPref
+    // endregion
+
+    // region AuthPref
 
     override fun putRequestToken(requestToken: RequestToken?) = with(prefs.edit()) {
         putString(AuthPref.REQUEST_TOKEN_KEY, gson.toJson(requestToken))
@@ -34,15 +32,6 @@ class KiwiPreferences(context: Context) : AuthPref {
     override fun getRequestToken(): RequestToken? = with(prefs) {
         val token = getString(AuthPref.REQUEST_TOKEN_KEY, null)
         return@with gson.fromJson(token)
-    }
-
-    override fun putVerifier(verifier: String): Boolean = with(prefs.edit()) {
-        putString(AuthPref.VERIFIER_KEY, verifier)
-        commit()
-    }
-
-    override fun getVerifier(): String = with(prefs) {
-        return@with getString(AuthPref.VERIFIER_KEY, "")
     }
 
     override fun putAccessToken(accessToken: AccessToken?) = with(prefs.edit()) {
@@ -55,4 +44,5 @@ class KiwiPreferences(context: Context) : AuthPref {
         return@with gson.fromJson(token)
     }
 
+    // endregion
 }
