@@ -3,6 +3,7 @@ package adamyy.github.com.kiwi.ui.features.home
 import adamyy.github.com.kiwi.R
 import adamyy.github.com.kiwi.ui.base.BaseKiwiActivity
 import adamyy.github.com.kiwi.databinding.HomeBinding
+import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 
 class HomeActivity : BaseKiwiActivity<HomeBinding>() {
@@ -27,7 +28,8 @@ class HomeActivity : BaseKiwiActivity<HomeBinding>() {
         false
     }
 
-    override fun initUi() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         binding.navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         val existingFragment = supportFragmentManager.findFragmentByTag(TimelineFragment.TAG)
         supportFragmentManager.beginTransaction()

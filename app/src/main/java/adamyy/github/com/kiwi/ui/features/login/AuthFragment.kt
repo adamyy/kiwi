@@ -4,9 +4,9 @@ import adamyy.github.com.kiwi.R
 import adamyy.github.com.kiwi.data.entity.AccessToken
 import adamyy.github.com.kiwi.data.entity.RequestToken
 import adamyy.github.com.kiwi.data.repository.AuthRepository
+import adamyy.github.com.kiwi.data.source.network.TwitterApiConstant
 import adamyy.github.com.kiwi.ui.common.SingleUIModel
 import adamyy.github.com.kiwi.ui.base.UrlFragment
-import android.content.Context
 import android.net.Uri
 import android.support.annotation.StringRes
 import android.util.Log
@@ -28,21 +28,15 @@ class AuthFragment : UrlFragment() {
 
     @Inject lateinit var authRepo: AuthRepository
 
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-
-    }
-
-    override fun initUi() {
-        super.initUi()
+    override fun onResume() {
+        super.onResume()
         loadAuthentication()
     }
 
     // region UrlFragment
 
     override fun onOverrideUrlLoading(view: WebView, url: Uri): Boolean {
-        // TODO https://github.com/adamyy/kiwi/auth/?denied=06_XJAAAAAAA03y1AAABXUQJANc
-        if (url.toString().startsWith(getString(R.string.twitter_api_callback_url))) {
+        if (url.toString().startsWith(TwitterApiConstant.OAUTH_CALLBACK)) {
             handleAuth(url)
             return true
         } else {
@@ -70,14 +64,13 @@ class AuthFragment : UrlFragment() {
     }
 
     override fun onLoadingError() {
-        activity.supportFragmentManager.beginTransaction().remove(this).commit()
         getDelegate().onAuthFailed(R.string.sign_in_error_load_url)
     }
 
     // endregion
 
     private fun loadAuthentication() {
-        addDisposable(authRepo.getOAuthRequestToken()
+        authRepo.getOAuthRequestToken()
                 .map {
                     (inFlight, isSuccess, data, error) ->
                     if (inFlight) SingleUIModel.inProgress<RequestToken>()
@@ -107,12 +100,11 @@ class AuthFragment : UrlFragment() {
                         {
                             Log.d(TAG, "request token completed")
                         }
-                )
-        )
+                ).attach()
     }
 
     private fun loadAccessToken(verifier: String) {
-        addDisposable(authRepo.getOAuthAccessToken(verifier)
+        authRepo.getOAuthAccessToken(verifier)
                 .map {
                     (inFlight, isSuccess, data, error) ->
                     if (inFlight) SingleUIModel.inProgress<AccessToken>()
@@ -142,8 +134,7 @@ class AuthFragment : UrlFragment() {
                         {
                             Log.d(TAG, "completed")
                         }
-                )
-        )
+                ).attach()
     }
 
     fun getDelegate(): Delegate = activity as Delegate

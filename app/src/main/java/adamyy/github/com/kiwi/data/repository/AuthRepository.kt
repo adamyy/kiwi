@@ -10,4 +10,6 @@ interface AuthRepository {
     fun getOAuthRequestToken(): Observable<SingleResult<RequestToken>>
 
     fun getOAuthAccessToken(verifier: String): Observable<SingleResult<AccessToken>>
+
+    fun isAuthenticated(): Observable<Boolean>
 }

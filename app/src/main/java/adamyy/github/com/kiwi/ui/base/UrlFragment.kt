@@ -3,6 +3,8 @@ package adamyy.github.com.kiwi.ui.base
 import adamyy.github.com.kiwi.R
 import adamyy.github.com.kiwi.databinding.UrlFragmentBinding
 import android.net.Uri
+import android.os.Bundle
+import android.support.annotation.CallSuper
 import android.util.Log
 import android.view.View
 import android.webkit.*
@@ -21,11 +23,12 @@ abstract class UrlFragment: BaseKiwiFragment<UrlFragmentBinding>() {
 
     private lateinit var loadUrl: Runnable
 
-    override fun initUi() {
-        setup(binding.webView)
+    @CallSuper override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupWebView(binding.webView)
     }
 
-    private fun setup(webView: WebView) {
+    private fun setupWebView(webView: WebView) {
         val settings = webView.settings
         settings.javaScriptEnabled = true
         webView.setWebViewClient(object : WebViewClient(){

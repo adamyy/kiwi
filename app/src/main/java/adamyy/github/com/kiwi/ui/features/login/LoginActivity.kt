@@ -6,6 +6,7 @@ import adamyy.github.com.kiwi.databinding.BasicBinding
 import adamyy.github.com.kiwi.ui.common.action
 import adamyy.github.com.kiwi.ui.features.home.HomeActivity
 import android.content.Intent
+import android.os.Bundle
 import android.support.design.widget.Snackbar
 
 class LoginActivity : BaseKiwiActivity<BasicBinding>(), WelcomeFragment.Delegate, AuthFragment.Delegate {
@@ -14,7 +15,12 @@ class LoginActivity : BaseKiwiActivity<BasicBinding>(), WelcomeFragment.Delegate
         val TAG = LoginActivity::class.simpleName
     }
 
-    override fun initUi() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        showWelcome()
+    }
+
+    private fun showWelcome() {
         val existingFragment = supportFragmentManager.findFragmentByTag(WelcomeFragment.TAG)
         supportFragmentManager.beginTransaction()
                 .replace(R.id.container, existingFragment ?: WelcomeFragment(), WelcomeFragment.TAG)
@@ -22,6 +28,10 @@ class LoginActivity : BaseKiwiActivity<BasicBinding>(), WelcomeFragment.Delegate
     }
 
     // region WelcomeFragment#Delegate
+
+    override fun skipAuth() {
+        onAuthSuccess()
+    }
 
     override fun startAuth() {
         val authFragment = AuthFragment.init()
