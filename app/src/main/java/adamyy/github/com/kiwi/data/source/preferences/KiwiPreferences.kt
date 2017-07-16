@@ -31,7 +31,7 @@ class KiwiPreferences(
 
     override fun getRequestToken(): RequestToken? = with(prefs) {
         val token = getString(AuthPref.REQUEST_TOKEN_KEY, null)
-        return@with gson.fromJson(token)
+        return@with if(token != null) gson.fromJson(token) else null
     }
 
     override fun putAccessToken(accessToken: AccessToken?) = with(prefs.edit()) {
@@ -41,7 +41,7 @@ class KiwiPreferences(
 
     override fun getAccessToken(): AccessToken? = with(prefs) {
         val token = getString(AuthPref.ACCESS_TOKEN_KEY, null)
-        return@with gson.fromJson(token)
+        return@with if(token != null) gson.fromJson(token) else null
     }
 
     // endregion
