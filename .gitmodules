@@ -1,0 +1,3 @@
+[submodule "lib/butterfly"]
+	path = lib/butterfly
+	url = git@github.com:adamyy/Butterfly.git

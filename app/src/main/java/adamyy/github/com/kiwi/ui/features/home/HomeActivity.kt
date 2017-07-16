@@ -5,8 +5,9 @@ import adamyy.github.com.kiwi.ui.base.BaseKiwiActivity
 import adamyy.github.com.kiwi.databinding.HomeBinding
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
+import com.yifan.butterfly.BActivity
 
-class HomeActivity : BaseKiwiActivity<HomeBinding>() {
+@BActivity class HomeActivity : BaseKiwiActivity<HomeBinding>() {
 
     companion object {
         val TAG = HomeActivity::class.simpleName

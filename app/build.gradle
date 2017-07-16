@@ -105,6 +105,10 @@ dependencies {
     debugCompile "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
     releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
     testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
+
+    compile project(':butterfly-annotations')
+    compile project(':butterfly-api')
+    kapt project(':butterfly-compiler')
 }
 
 kapt {

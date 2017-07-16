@@ -1,1 +1,4 @@
-include ':app'
+include ':app', ':butterfly-annotations', ':butterfly-api', ':butterfly-compiler'
+project(':butterfly-annotations').projectDir = new File('lib/butterfly/butterfly-annotations')
+project(':butterfly-api').projectDir = new File('lib/butterfly/butterfly-api')
+project(':butterfly-compiler').projectDir = new File('lib/butterfly/butterfly-compiler')

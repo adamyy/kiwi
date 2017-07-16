@@ -4,10 +4,9 @@ import adamyy.github.com.kiwi.R
 import adamyy.github.com.kiwi.ui.base.BaseKiwiActivity
 import adamyy.github.com.kiwi.databinding.BasicBinding
 import adamyy.github.com.kiwi.ui.common.action
-import adamyy.github.com.kiwi.ui.features.home.HomeActivity
-import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import com.yifan.butterfly.Butterfly
 
 class LoginActivity : BaseKiwiActivity<BasicBinding>(), WelcomeFragment.Delegate, AuthFragment.Delegate {
 
@@ -30,7 +29,7 @@ class LoginActivity : BaseKiwiActivity<BasicBinding>(), WelcomeFragment.Delegate
     // region WelcomeFragment#Delegate
 
     override fun skipAuth() {
-        onAuthSuccess()
+        transitToHome()
     }
 
     override fun startAuth() {
@@ -46,9 +45,7 @@ class LoginActivity : BaseKiwiActivity<BasicBinding>(), WelcomeFragment.Delegate
     // region AuthFragment#Delegate
 
     override fun onAuthSuccess() {
-        supportFragmentManager.popBackStack()
-        val intent = Intent(this, HomeActivity::class.java)
-        startActivity(intent)
+        transitToHome()
     }
 
     override fun onAuthFailed(message: Int) {
@@ -68,4 +65,7 @@ class LoginActivity : BaseKiwiActivity<BasicBinding>(), WelcomeFragment.Delegate
         }
     }
 
+    private fun transitToHome() {
+        Butterfly.toHomeActivity().go(this)
+    }
 }
