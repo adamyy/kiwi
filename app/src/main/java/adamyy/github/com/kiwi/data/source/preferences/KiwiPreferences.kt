@@ -24,16 +24,6 @@ class KiwiPreferences(
 
     // region AuthPref
 
-    override fun putRequestToken(requestToken: RequestToken?) = with(prefs.edit()) {
-        putString(AuthPref.REQUEST_TOKEN_KEY, gson.toJson(requestToken))
-        commit()
-    }
-
-    override fun getRequestToken(): RequestToken? = with(prefs) {
-        val token = getString(AuthPref.REQUEST_TOKEN_KEY, null)
-        return@with if(token != null) gson.fromJson(token) else null
-    }
-
     override fun putAccessToken(accessToken: AccessToken?) = with(prefs.edit()) {
         putString(AuthPref.ACCESS_TOKEN_KEY, gson.toJson(accessToken))
         commit()

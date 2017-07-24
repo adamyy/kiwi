@@ -1,6 +1,6 @@
 package adamyy.github.com.kiwi.di.features
 
-import adamyy.github.com.kiwi.ui.features.home.TimelineFragment
+import adamyy.github.com.kiwi.home.TimelineFragment
 import dagger.Subcomponent
 import dagger.android.AndroidInjector
 

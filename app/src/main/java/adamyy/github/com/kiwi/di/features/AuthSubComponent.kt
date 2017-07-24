@@ -1,6 +1,6 @@
 package adamyy.github.com.kiwi.di.features
 
-import adamyy.github.com.kiwi.ui.features.login.AuthFragment
+import adamyy.github.com.kiwi.login.AuthFragment
 import dagger.Subcomponent
 import dagger.android.AndroidInjector
 

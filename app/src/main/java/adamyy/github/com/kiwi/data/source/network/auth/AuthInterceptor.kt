@@ -1,4 +1,4 @@
-package adamyy.github.com.kiwi.data.source.network
+package adamyy.github.com.kiwi.data.source.network.auth
 
 import oauth.signpost.exception.OAuthException
 import okhttp3.*
@@ -6,34 +6,20 @@ import org.json.JSONObject
 import se.akerfeldt.okhttp.signpost.OkHttpOAuthConsumer
 import java.io.IOException
 
-class TwitterOAuthInterceptor(val consumer: OkHttpOAuthConsumer) : Interceptor {
+class AuthInterceptor(val consumer: OkHttpOAuthConsumer) : Interceptor {
 
     companion object {
         const val OAUTH_PATH = "/oauth"
-        const val REQUEST_TOKEN_PATH = "/oauth/request_token"
-        const val ACCESS_TOKEN_PATH = "/oauth/access_token"
-        const val PARAM_TOKEN = "oauth_token"
-        const val PARAM_SECRET = "oauth_token_secret"
+        const val REQUEST_TOKEN_PATH = "$OAUTH_PATH/request_token"
+        const val ACCESS_TOKEN_PATH = "$OAUTH_PATH/access_token"
     }
 
     override fun intercept(chain: Interceptor.Chain): Response {
         try {
             val signedRequest = consumer.sign(chain.request()).unwrap() as Request
-            return scanOAuthTokenResponse(chain.proceed(scanRequest(signedRequest)))
+            return scanOAuthTokenResponse(chain.proceed(signedRequest))
         } catch (e: OAuthException) {
             throw IOException("Could not sign request", e)
-        }
-    }
-
-    private fun scanRequest(request: Request): Request {
-        val url = request.url()
-        val encodedPath = url.encodedPath()
-        return if (!encodedPath.startsWith(OAUTH_PATH)) {
-            request.newBuilder()
-                    .url(url.newBuilder().encodedPath("/${TwitterApiConstant.API_VERSION}$encodedPath").build())
-                    .build()
-        } else {
-            request
         }
     }
 
@@ -46,11 +32,6 @@ class TwitterOAuthInterceptor(val consumer: OkHttpOAuthConsumer) : Interceptor {
                 Pair(it.substringBefore("="), it.substringAfter("="))
             }.forEach { (name, value) ->
                 json.put(name, value)
-                if (name == PARAM_TOKEN) {
-                    consumer.setTokenWithSecret(value, consumer.tokenSecret)
-                } else if (name == PARAM_SECRET) {
-                    consumer.setTokenWithSecret(consumer.token, value)
-                }
             }
             return response.newBuilder()
                     .body(ResponseBody.create(MediaType.parse("application/json; charset=utf-8"), json.toString()))
@@ -65,4 +46,7 @@ class TwitterOAuthInterceptor(val consumer: OkHttpOAuthConsumer) : Interceptor {
         }
     }
 
+    fun setToken(token: String, tokenSecret: String) {
+        consumer.setTokenWithSecret(token, tokenSecret)
+    }
 }

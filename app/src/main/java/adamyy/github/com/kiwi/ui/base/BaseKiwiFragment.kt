@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.support.annotation.CallSuper
 import android.support.annotation.LayoutRes
 import android.support.v4.app.Fragment
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,6 +37,8 @@ abstract class BaseKiwiFragment<T: ViewDataBinding> : Fragment() {
     }
 
     abstract @LayoutRes fun getLayoutRes(): Int
+
+    protected fun getAppCompatActivity(): AppCompatActivity = activity as AppCompatActivity
 
     /**
      * Attach subscription to the lifecycle of this fragment so it will be destroyed in onDestroy

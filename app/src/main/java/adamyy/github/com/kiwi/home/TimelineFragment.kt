@@ -1,4 +1,4 @@
-package adamyy.github.com.kiwi.ui.features.home
+package adamyy.github.com.kiwi.home
 
 import adamyy.github.com.kiwi.R
 import adamyy.github.com.kiwi.data.repository.UserRepository

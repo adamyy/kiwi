@@ -1,14 +1,12 @@
-package adamyy.github.com.kiwi.ui.features.login
+package adamyy.github.com.kiwi.login
 
 import adamyy.github.com.kiwi.R
-import adamyy.github.com.kiwi.data.repository.AuthRepository
+import adamyy.github.com.kiwi.data.source.network.auth.SessionManager
 import adamyy.github.com.kiwi.ui.base.BaseKiwiFragment
 import adamyy.github.com.kiwi.databinding.WelcomeBinding
 import android.os.Bundle
 import android.view.View
 import com.jakewharton.rxbinding2.view.RxView
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
@@ -18,7 +16,7 @@ class WelcomeFragment : BaseKiwiFragment<WelcomeBinding>() {
         val TAG = WelcomeFragment::class.simpleName
     }
 
-    @Inject lateinit var authRepo: AuthRepository
+    @Inject lateinit var sessionManager: SessionManager
 
     override fun getLayoutRes(): Int = R.layout.fragment_welcome
 
@@ -32,20 +30,14 @@ class WelcomeFragment : BaseKiwiFragment<WelcomeBinding>() {
     }
 
     private fun checkAuth() {
-        fun showSignin() {
+        fun showSignIn() {
             binding.signinContainer.visibility = View.VISIBLE
         }
-        authRepo.isAuthenticated()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { isAuthenticated ->
-                    if (isAuthenticated) {
-                        getDelegate().skipAuth()
-                    } else {
-                        showSignin()
-                    }
-                }
-                .attach()
+        if (sessionManager.isAuthenticated()) {
+            getDelegate().skipAuth()
+        } else {
+            showSignIn()
+        }
     }
 
     fun getDelegate(): Delegate = activity as Delegate

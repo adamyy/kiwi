@@ -19,14 +19,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name="adamyy.github.com.kiwi.ui.features.home.HomeActivity"
+            android:name="adamyy.github.com.kiwi.home.HomeActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme">
         </activity>
         <activity
-            android:name="adamyy.github.com.kiwi.ui.features.login.LoginActivity"
+            android:name="adamyy.github.com.kiwi.login.LoginActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:launchMode="singleTop"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 

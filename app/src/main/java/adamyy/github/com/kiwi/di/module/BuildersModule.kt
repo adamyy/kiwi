@@ -3,9 +3,9 @@ package adamyy.github.com.kiwi.di.module
 import adamyy.github.com.kiwi.di.features.AuthSubComponent
 import adamyy.github.com.kiwi.di.features.TimelineSubComponent
 import adamyy.github.com.kiwi.di.features.WelcomeSubComponent
-import adamyy.github.com.kiwi.ui.features.home.TimelineFragment
-import adamyy.github.com.kiwi.ui.features.login.AuthFragment
-import adamyy.github.com.kiwi.ui.features.login.WelcomeFragment
+import adamyy.github.com.kiwi.home.TimelineFragment
+import adamyy.github.com.kiwi.login.AuthFragment
+import adamyy.github.com.kiwi.login.WelcomeFragment
 import android.support.v4.app.Fragment
 import dagger.Binds
 import dagger.Module

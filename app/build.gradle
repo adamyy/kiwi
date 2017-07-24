@@ -19,6 +19,7 @@ android {
         buildConfigField "String", "API_SECRET", twitter_api_secret
         buildConfigField "String", "API_CALLBACK", twitter_api_callback
         buildConfigField "String", "API_BASE_URL", twitter_api_base_url
+        buildConfigField "String", "API_AUTH_URL", twitter_api_auth_url
     }
     buildTypes {
         debug {
@@ -44,6 +45,7 @@ ext {
     rxBindingVersion = "2.0.0"
     daggerVersion = "2.11"
     glideVersion = "4.0.0-RC1"
+    timberVersion = "4.5.1"
 
     leakCanaryVersion = "1.5.1"
 }
@@ -106,9 +108,13 @@ dependencies {
     releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
     testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leakCanaryVersion"
 
+    // butterfly
     compile project(':butterfly-annotations')
     compile project(':butterfly-api')
     kapt project(':butterfly-compiler')
+
+    // logging
+    compile "com.jakewharton.timber:timber:$timberVersion"
 }
 
 kapt {

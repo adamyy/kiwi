@@ -8,6 +8,7 @@ import adamyy.github.com.kiwi.di.features.WelcomeSubComponent
 import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -31,6 +32,7 @@ class AppModule {
 
     @Provides @Singleton
     fun provideGson(): Gson {
-        return Gson()
+        val builder = GsonBuilder()
+        return builder.create()
     }
 }

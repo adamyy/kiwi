@@ -1,4 +1,4 @@
-package adamyy.github.com.kiwi.ui.features.home
+package adamyy.github.com.kiwi.home
 
 import adamyy.github.com.kiwi.R
 import adamyy.github.com.kiwi.ui.base.BaseKiwiActivity
@@ -7,7 +7,8 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import com.yifan.butterfly.BActivity
 
-@BActivity class HomeActivity : BaseKiwiActivity<HomeBinding>() {
+@BActivity
+class HomeActivity : BaseKiwiActivity<HomeBinding>() {
 
     companion object {
         val TAG = HomeActivity::class.simpleName

@@ -1,4 +1,4 @@
-package adamyy.github.com.kiwi.ui.features.login
+package adamyy.github.com.kiwi.login
 
 import adamyy.github.com.kiwi.R
 import adamyy.github.com.kiwi.ui.base.BaseKiwiActivity
@@ -6,8 +6,10 @@ import adamyy.github.com.kiwi.databinding.BasicBinding
 import adamyy.github.com.kiwi.ui.common.action
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import com.yifan.butterfly.BActivity
 import com.yifan.butterfly.Butterfly
 
+@BActivity
 class LoginActivity : BaseKiwiActivity<BasicBinding>(), WelcomeFragment.Delegate, AuthFragment.Delegate {
 
     companion object {
@@ -67,5 +69,6 @@ class LoginActivity : BaseKiwiActivity<BasicBinding>(), WelcomeFragment.Delegate
 
     private fun transitToHome() {
         Butterfly.toHomeActivity().go(this)
+        finish()
     }
 }
