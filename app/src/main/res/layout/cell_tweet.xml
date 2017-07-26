@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/profile_image"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="@dimen/margin_default"
+        android:layout_marginTop="@dimen/margin_default"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_kiwi"/>
+
+    <TextView
+        android:id="@+id/screen_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_default"
+        android:textAppearance="@style/Text.Title"
+        app:layout_constraintStart_toEndOf="@+id/profile_image"
+        app:layout_constraintTop_toTopOf="@+id/profile_image"
+        tools:text="Adam Yang"/>
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_small"
+        android:textAppearance="@style/Text.Subtitle"
+        app:layout_constraintStart_toEndOf="@+id/screen_name"
+        app:layout_constraintTop_toTopOf="@+id/screen_name"
+        tools:text="\@uw_yifanyang"/>
+
+    <TextView
+        android:id="@+id/tweet_body"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_default"
+        android:layout_marginStart="@dimen/margin_default"
+        android:layout_marginTop="@dimen/margin_small"
+        android:textAppearance="@style/Text.Body"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/profile_image"
+        app:layout_constraintTop_toBottomOf="@+id/screen_name"
+        tools:maxLines="9"
+        tools:text="@tools:sample/lorem/random"/>
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:layout_marginEnd="@dimen/margin_small"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tweet_body"
+        app:layout_constraintStart_toStartOf="@+id/tweet_body"
+        app:layout_constraintTop_toBottomOf="@+id/tweet_body">
+
+        <TextView
+            android:id="@+id/like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="@dimen/padding_xsmall"
+            android:drawableStart="@drawable/ic_heart_outline"
+            android:gravity="center_vertical"
+            tools:text="10"/>
+
+        <TextView
+            android:id="@+id/retweet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="@dimen/padding_xsmall"
+            android:drawableStart="@drawable/ic_retweet"
+            android:gravity="center_vertical"
+            tools:text="8"/>
+
+        <TextView
+            android:id="@+id/reply"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="@dimen/padding_xsmall"
+            android:drawableStart="@drawable/ic_reply_outline"
+            android:gravity="center_vertical"
+            tools:text="15"/>
+
+        <TextView
+            android:id="@+id/private_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawablePadding="@dimen/padding_xsmall"
+            android:drawableStart="@drawable/ic_private_message"
+            android:gravity="center_vertical"/>
+
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

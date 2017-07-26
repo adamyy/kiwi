@@ -6,7 +6,7 @@ import adamyy.github.com.kiwi.data.entity.User
 import adamyy.github.com.kiwi.data.source.network.UserApi
 import io.reactivex.Observable
 
-class UserRepositoryImpl(val userApi: UserApi): UserRepository {
+class UserRepositoryImpl(private val userApi: UserApi): UserRepository {
 
     override fun getUserById(id: String): Observable<AsyncResult<User>> =
             userApi.getUserById(id).wrapInAsyncResult {}

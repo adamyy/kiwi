@@ -17,7 +17,8 @@
 
     <dimen name="text_small">12sp</dimen>
     <dimen name="text_normal">16sp</dimen>
-    <dimen name="text_large">24sp</dimen>
+    <dimen name="text_large">20sp</dimen>
+    <dimen name="text_xlarge">24sp</dimen>
 
     <dimen name="text_button">16sp</dimen>
     <dimen name="text_body_default">16sp</dimen>
@@ -25,5 +26,7 @@
     <dimen name="text_subtitle">16sp</dimen>
 
     <dimen name="button_corner_radius">2dp</dimen>
+
+    <dimen name="toolbar_shadow_height">5dp</dimen>
 
 </resources>

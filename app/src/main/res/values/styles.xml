@@ -12,33 +12,39 @@
     </style>
 
     <style name="Toolbar" parent="ThemeOverlay.AppCompat.ActionBar">
-        <item name="android:background">@color/white</item>
+        <item name="android:background">@color/kiwi_green</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_arrow_back</item>
         <item name="homeAsUpIndicator">@drawable/ic_arrow_back</item>
-        <item name="colorControlActivated">@color/kiwi_green</item>
+        <item name="colorControlActivated">@color/kiwi_green_dark</item>
     </style>
 
     <style name="Text"/>
 
     <style name="Text.Toolbar" parent="Text">
         <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">@dimen/text_normal</item>
+        <item name="android:textSize">@dimen/text_large</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:layout_marginLeft">@dimen/margin_default</item>
         <item name="android:layout_marginRight">@dimen/margin_default</item>
     </style>
 
     <style name="Text.Title" parent="Text">
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">@dimen/text_title</item>
-        <item name="android:fontFamily">@font/roboto_thin</item>
+        <item name="android:textColor">@color/body_text</item>
+        <item name="android:textSize">@dimen/text_normal</item>
+        <item name="android:fontFamily">@font/roboto_light</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="Text.Subtitle" parent="Text">
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@color/subtitle_text</item>
         <item name="android:textSize">@dimen/text_subtitle</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="Text.Body" parent="Text">
+        <item name="android:textColor">@color/body_text</item>
+        <item name="android:textSize">@dimen/text_normal</item>
+        <item name="android:fontFamily">@font/roboto_light</item>
     </style>
 
     <style name="Button"/>

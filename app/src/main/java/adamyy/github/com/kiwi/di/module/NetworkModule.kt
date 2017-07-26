@@ -2,6 +2,7 @@ package adamyy.github.com.kiwi.di.module
 
 import adamyy.github.com.kiwi.BuildConfig
 import adamyy.github.com.kiwi.data.source.network.SigningInterceptor
+import adamyy.github.com.kiwi.data.source.network.StatusApi
 import adamyy.github.com.kiwi.data.source.network.UserApi
 import adamyy.github.com.kiwi.data.source.network.auth.SessionManager
 import com.google.gson.Gson
@@ -50,4 +51,7 @@ class NetworkModule {
 
     @Provides @Singleton
     fun provideUserApi(retrofit: Retrofit): UserApi = retrofit.create(UserApi::class.java)
+
+    @Provides @Singleton
+    fun provideStatusApi(retrofit: Retrofit): StatusApi = retrofit.create(StatusApi::class.java)
 }

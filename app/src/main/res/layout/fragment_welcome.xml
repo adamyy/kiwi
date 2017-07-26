@@ -39,7 +39,10 @@
                 android:layout_marginBottom="@dimen/margin_default"
                 android:layout_marginStart="@dimen/margin_large"
                 android:text="@string/greeting_title"
-                android:textAppearance="@style/Text.Title"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_title"
+                android:fontFamily="@font/roboto_thin"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@+id/greeting_message"
                 app:layout_constraintStart_toStartOf="parent"/>
 
@@ -49,7 +52,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_default"
                 android:text="@string/greeting_message"
-                android:textAppearance="@style/Text.Subtitle"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_subtitle"
+                android:fontFamily="@font/roboto_regular"
                 app:layout_constraintBottom_toTopOf="@+id/button_signin"
                 app:layout_constraintEnd_toEndOf="@+id/button_signin"
                 app:layout_constraintStart_toStartOf="@+id/button_signin"/>
@@ -62,7 +67,6 @@
                 android:layout_marginBottom="@dimen/margin_xlarge"
                 android:layout_marginEnd="@dimen/margin_large"
                 android:layout_marginStart="@dimen/margin_large"
-                android:drawableLeft="@drawable/ic_twitter"
                 android:drawableStart="@drawable/ic_twitter"
                 android:paddingLeft="@dimen/padding_default"
                 android:paddingStart="@dimen/padding_default"

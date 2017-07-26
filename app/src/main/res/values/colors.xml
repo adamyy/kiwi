@@ -19,5 +19,7 @@
     <color name="failure">@color/red</color>
     <color name="success">@color/green</color>
 
+    <color name="body_text">#212B35</color>
+    <color name="subtitle_text">#919EAB</color>
 
 </resources>

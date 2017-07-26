@@ -33,6 +33,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/loading"
                 android:textAlignment="center"
+                android:textColor="@color/white"
                 android:textAppearance="@style/Text.Subtitle"/>
 
         </LinearLayout>
