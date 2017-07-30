@@ -1,4 +1,4 @@
-package adamyy.github.com.kiwi.di.module
+package adamyy.github.com.kiwi.di
 
 import adamyy.github.com.kiwi.data.source.preferences.AuthPref
 import adamyy.github.com.kiwi.data.source.preferences.KiwiPreferences

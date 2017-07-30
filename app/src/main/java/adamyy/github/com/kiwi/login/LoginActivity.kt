@@ -3,36 +3,39 @@ package adamyy.github.com.kiwi.login
 import adamyy.github.com.kiwi.R
 import adamyy.github.com.kiwi.ui.base.BaseKiwiActivity
 import adamyy.github.com.kiwi.databinding.BasicBinding
+import adamyy.github.com.kiwi.login.auth.AuthFragment
+import adamyy.github.com.kiwi.login.welcome.WelcomeFragment
 import adamyy.github.com.kiwi.ui.common.action
-import android.os.Bundle
 import android.support.design.widget.Snackbar
 import com.yifan.butterfly.BActivity
 import com.yifan.butterfly.Butterfly
 
 @BActivity
-class LoginActivity : BaseKiwiActivity<BasicBinding>(), WelcomeFragment.Delegate, AuthFragment.Delegate {
+class LoginActivity : BaseKiwiActivity<LoginContract.View, LoginContract.Presenter, BasicBinding>(),
+        LoginContract.View, WelcomeFragment.Delegate, AuthFragment.Delegate {
 
     companion object {
         val TAG = LoginActivity::class.simpleName
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        showWelcome()
+    override fun onResume() {
+        super.onResume()
+        presenter.start()
     }
 
-    private fun showWelcome() {
+    override fun showWelcome() {
         val existingFragment = supportFragmentManager.findFragmentByTag(WelcomeFragment.TAG)
         supportFragmentManager.beginTransaction()
                 .replace(R.id.container, existingFragment ?: WelcomeFragment(), WelcomeFragment.TAG)
                 .commit()
     }
 
-    // region WelcomeFragment#Delegate
-
-    override fun skipAuth() {
-        transitToHome()
+    override fun transitToHome() {
+        Butterfly.toHomeActivity().go(this)
+        finish()
     }
+
+    // region WelcomeFragment#Delegate
 
     override fun startAuth() {
         val authFragment = AuthFragment.init()
@@ -65,10 +68,5 @@ class LoginActivity : BaseKiwiActivity<BasicBinding>(), WelcomeFragment.Delegate
         } else {
             super.onBackPressed()
         }
-    }
-
-    private fun transitToHome() {
-        Butterfly.toHomeActivity().go(this)
-        finish()
     }
 }

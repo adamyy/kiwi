@@ -1,6 +1,5 @@
-package adamyy.github.com.kiwi.di.features
+package adamyy.github.com.kiwi.login.welcome
 
-import adamyy.github.com.kiwi.login.WelcomeFragment
 import dagger.Subcomponent
 import dagger.android.AndroidInjector
 

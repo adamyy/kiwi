@@ -10,7 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-class ProgressDialogFragment private constructor() : FullScreenDialogFragment() {
+class ProgressDialogFragment : FullScreenDialogFragment() {
 
     companion object {
         val TAG = ProgressDialogFragment::class.simpleName
@@ -19,7 +19,6 @@ class ProgressDialogFragment private constructor() : FullScreenDialogFragment() 
 
         private fun newInstance(message: Int): ProgressDialogFragment {
             val fragment = ProgressDialogFragment()
-            fragment.retainInstance = true
             val bundle = Bundle()
             bundle.putInt(MESSAGE_KEY, message)
             fragment.arguments = bundle
@@ -29,9 +28,14 @@ class ProgressDialogFragment private constructor() : FullScreenDialogFragment() 
         fun show(activity: FragmentActivity, @StringRes message: Int = R.string.loading): ProgressDialogFragment {
             val dialog = newInstance(message)
             dialog.show(activity.supportFragmentManager, FullScreenDialogFragment.TAG)
-            if (activity is BaseKiwiActivity<*>) activity.fullScreenDialog = dialog
+            if (activity is BaseKiwiActivity<*, *, *>) activity.fullScreenDialog = dialog
             return dialog
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
     }
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {

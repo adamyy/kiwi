@@ -1,4 +1,4 @@
-package adamyy.github.com.kiwi.login
+package adamyy.github.com.kiwi.login.welcome
 
 import adamyy.github.com.kiwi.R
 import adamyy.github.com.kiwi.data.source.network.auth.SessionManager
@@ -16,8 +16,6 @@ class WelcomeFragment : BaseKiwiFragment<WelcomeBinding>() {
         val TAG = WelcomeFragment::class.simpleName
     }
 
-    @Inject lateinit var sessionManager: SessionManager
-
     override fun getLayoutRes(): Int = R.layout.fragment_welcome
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
@@ -26,24 +24,11 @@ class WelcomeFragment : BaseKiwiFragment<WelcomeBinding>() {
                 .throttleFirst(500, TimeUnit.MILLISECONDS)
                 .subscribe { getDelegate().startAuth() }
                 .attach()
-        checkAuth()
-    }
-
-    private fun checkAuth() {
-        fun showSignIn() {
-            binding.signinContainer.visibility = View.VISIBLE
-        }
-        if (sessionManager.isAuthenticated()) {
-            getDelegate().skipAuth()
-        } else {
-            showSignIn()
-        }
     }
 
     fun getDelegate(): Delegate = activity as Delegate
 
     interface Delegate {
-        fun skipAuth()
         fun startAuth()
     }
 }

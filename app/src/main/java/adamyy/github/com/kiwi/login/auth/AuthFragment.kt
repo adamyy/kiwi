@@ -1,4 +1,4 @@
-package adamyy.github.com.kiwi.login
+package adamyy.github.com.kiwi.login.auth
 
 import adamyy.github.com.kiwi.BuildConfig
 import adamyy.github.com.kiwi.R

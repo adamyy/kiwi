@@ -1,10 +1,9 @@
-package adamyy.github.com.kiwi.di.module
+package adamyy.github.com.kiwi.di
 
 import adamyy.github.com.kiwi.KiwiApplication
 import adamyy.github.com.kiwi.data.source.preferences.BasePref
-import adamyy.github.com.kiwi.di.features.AuthSubComponent
-import adamyy.github.com.kiwi.di.features.TimelineSubComponent
-import adamyy.github.com.kiwi.di.features.WelcomeSubComponent
+import adamyy.github.com.kiwi.home.HomeSubComponent
+import adamyy.github.com.kiwi.login.LoginSubComponent
 import android.content.Context
 import android.content.SharedPreferences
 import com.google.gson.FieldNamingPolicy
@@ -15,9 +14,8 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module(subcomponents = arrayOf(
-        WelcomeSubComponent::class,
-        AuthSubComponent::class,
-        TimelineSubComponent::class
+        LoginSubComponent::class,
+        HomeSubComponent::class
 ))
 class AppModule {
 

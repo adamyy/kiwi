@@ -1,12 +1,15 @@
-package adamyy.github.com.kiwi.home
+package adamyy.github.com.kiwi.home.timeline
 
 import adamyy.github.com.kiwi.R
-import adamyy.github.com.kiwi.data.repository.StatusRepository
 import adamyy.github.com.kiwi.databinding.TimelineBinding
 import adamyy.github.com.kiwi.ui.base.BaseKiwiFragment
+import android.os.Bundle
+import android.view.View
 import javax.inject.Inject
 
-class TimelineFragment : BaseKiwiFragment<TimelineBinding>() {
+class TimelineFragment : BaseKiwiFragment<TimelineBinding>(), TimelineContract.View {
+
+    @Inject lateinit var presenter: TimelineContract.Presenter
 
     companion object {
         val TAG = TimelineFragment::class.simpleName
@@ -14,10 +17,8 @@ class TimelineFragment : BaseKiwiFragment<TimelineBinding>() {
 
     override fun getLayoutRes(): Int = R.layout.fragment_timeline
 
-    @Inject lateinit var statusRepo: StatusRepository
-
-    override fun onResume() {
-        super.onResume()
+    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         configureToolbar()
     }
 

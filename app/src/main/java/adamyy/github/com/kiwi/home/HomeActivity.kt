@@ -3,12 +3,13 @@ package adamyy.github.com.kiwi.home
 import adamyy.github.com.kiwi.R
 import adamyy.github.com.kiwi.ui.base.BaseKiwiActivity
 import adamyy.github.com.kiwi.databinding.HomeBinding
+import adamyy.github.com.kiwi.home.timeline.TimelineFragment
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import com.yifan.butterfly.BActivity
 
 @BActivity
-class HomeActivity : BaseKiwiActivity<HomeBinding>() {
+class HomeActivity : BaseKiwiActivity<HomeContract.View, HomeContract.Presenter, HomeBinding>() {
 
     companion object {
         val TAG = HomeActivity::class.simpleName
@@ -17,7 +18,6 @@ class HomeActivity : BaseKiwiActivity<HomeBinding>() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
-
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
@@ -36,6 +36,7 @@ class HomeActivity : BaseKiwiActivity<HomeBinding>() {
         val existingFragment = supportFragmentManager.findFragmentByTag(TimelineFragment.TAG)
         supportFragmentManager.beginTransaction()
                 .replace(R.id.container, existingFragment ?: TimelineFragment(), TimelineFragment.TAG)
+                .addToBackStack(TimelineFragment.TAG)
                 .commit()
     }
 

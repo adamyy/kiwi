@@ -9,17 +9,33 @@ import android.support.annotation.CallSuper
 import android.support.annotation.LayoutRes
 import android.support.annotation.StringRes
 import android.support.design.widget.Snackbar
+import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
+import dagger.android.AndroidInjection
+import dagger.android.AndroidInjector
+import dagger.android.DispatchingAndroidInjector
+import dagger.android.support.HasSupportFragmentInjector
+import javax.inject.Inject
 
-abstract class BaseKiwiActivity<T: ViewDataBinding>: AppCompatActivity() {
+abstract class BaseKiwiActivity<in V : BaseView, P : BasePresenter<V>, T : ViewDataBinding> : AppCompatActivity(), HasSupportFragmentInjector, BaseView {
+
+    @Inject protected lateinit var presenter: P
 
     var fullScreenDialog: FullScreenDialogFragment? = null
 
-    lateinit var binding: T
+    protected lateinit var binding: T
+
+    @Inject lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
+
+    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
+        return dispatchingAndroidInjector
+    }
 
     @CallSuper override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AndroidInjection.inject(this)
         binding = DataBindingUtil.setContentView<T>(this, getLayoutRes())
+        presenter.bindView(this as V)
     }
 
     @CallSuper override fun onResume() {
@@ -36,7 +52,9 @@ abstract class BaseKiwiActivity<T: ViewDataBinding>: AppCompatActivity() {
         if (dialog is FullScreenDialogFragment) fullScreenDialog = dialog
     }
 
-    protected fun dismissFullScreenDialog() = fullScreenDialog?.dismiss()
+    protected fun dismissFullScreenDialog() {
+        fullScreenDialog?.dismiss()
+    }
 
     protected fun snackMessage(message: String, length: Int = Snackbar.LENGTH_SHORT, f: Snackbar.() -> Unit = {}) {
         binding.root.snack(message, length, f)

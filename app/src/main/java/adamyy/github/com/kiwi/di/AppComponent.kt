@@ -1,7 +1,6 @@
-package adamyy.github.com.kiwi.di.component
+package adamyy.github.com.kiwi.di
 
 import adamyy.github.com.kiwi.KiwiApplication
-import adamyy.github.com.kiwi.di.module.*
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.support.AndroidSupportInjectionModule
