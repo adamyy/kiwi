@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface StatusApi {
 
-    @GET("statuses/home_timeline")
+    @GET("statuses/home_timeline.json")
     fun getHomeTimeline(
             @Query("count") count: Int = 20,
             @Query("since_id") sinceId: Long? = null,

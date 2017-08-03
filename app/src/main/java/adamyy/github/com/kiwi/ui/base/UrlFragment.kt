@@ -6,14 +6,13 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.annotation.CallSuper
 import android.util.Log
-import android.view.MenuItem
 import android.view.View
 import android.webkit.*
 
 abstract class UrlFragment: BaseKiwiFragment<UrlFragmentBinding>() {
 
     companion object {
-        val TAG = UrlFragment::class.simpleName
+        const val TAG = "UrlFragment"
         const val TIMEOUT_LIMIT = 30000L
     }
 
@@ -81,16 +80,6 @@ abstract class UrlFragment: BaseKiwiFragment<UrlFragmentBinding>() {
     override fun onDestroy() {
         binding.webView.destroy()
         super.onDestroy()
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        when(item?.itemId) {
-            android.R.id.home -> {
-
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     override fun getLayoutRes(): Int = R.layout.fragment_url

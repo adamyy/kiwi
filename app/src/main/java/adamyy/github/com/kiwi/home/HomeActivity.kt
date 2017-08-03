@@ -6,18 +6,22 @@ import adamyy.github.com.kiwi.databinding.HomeBinding
 import adamyy.github.com.kiwi.home.timeline.TimelineFragment
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
+import android.support.v4.app.Fragment
 import com.yifan.butterfly.BActivity
 
 @BActivity
-class HomeActivity : BaseKiwiActivity<HomeContract.View, HomeContract.Presenter, HomeBinding>() {
+class HomeActivity : BaseKiwiActivity<HomeContract.View, HomeContract.Presenter, HomeBinding>(), HomeContract.View {
 
     companion object {
-        val TAG = HomeActivity::class.simpleName
+        const val VISIBLE_PAGE_TAG = "VISIBLE_PAGE_TAG"
     }
+
+    private var visiblePageTag: String = TimelineFragment.TAG
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
-            R.id.navigation_home -> {
+            R.id.navigation_timeline -> {
+                loadFragment(TimelineFragment.TAG)
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
@@ -33,10 +37,40 @@ class HomeActivity : BaseKiwiActivity<HomeContract.View, HomeContract.Presenter,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-        val existingFragment = supportFragmentManager.findFragmentByTag(TimelineFragment.TAG)
+        loadFragment(visiblePageTag)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState?.putString(VISIBLE_PAGE_TAG, visiblePageTag)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        visiblePageTag = savedInstanceState?.getString(VISIBLE_PAGE_TAG) ?: TimelineFragment.TAG
+        loadFragment(visiblePageTag)
+    }
+
+    private fun loadFragment(tag: String) {
+        fun findExistingFragment(fragmentTag: String): Fragment? {
+            return supportFragmentManager.findFragmentByTag(fragmentTag)
+        }
+
+        fun createFragment(fragmentTag: String): Fragment {
+            return when (fragmentTag) {
+                TimelineFragment.TAG -> TimelineFragment()
+                else -> TODO("Implement other fragments")
+            }
+        }
+
+//        if (tag == visiblePageTag) {
+//            return
+//        }
+
+        val fragment = findExistingFragment(tag) ?: createFragment(tag)
         supportFragmentManager.beginTransaction()
-                .replace(R.id.container, existingFragment ?: TimelineFragment(), TimelineFragment.TAG)
-                .addToBackStack(TimelineFragment.TAG)
+                .replace(R.id.container, fragment, tag)
+                .addToBackStack(tag)
                 .commit()
     }
 

@@ -12,10 +12,6 @@ class KiwiPreferences(
         private val gson: Gson
 ) : AuthPref {
 
-    companion object {
-        val TAG = KiwiPreferences::class.simpleName
-    }
-
     // region BasePref
 
     override fun contains(key: String): Boolean = prefs.contains(key)

@@ -12,8 +12,7 @@
     <!-- Strings related to login -->
     <string name="prompt_account">Twitter Account</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in with Twitter</string>
-    <string name="action_sign_in_short">Sign in</string>
+    <string name="sign_in_with_twitter">Sign in with Twitter</string>
     <string name="sign_in">Sign in</string>
     <string name="sign_in_error_generic">Authentication failed</string>
     <string name="sign_in_error_load_url">Cannot load URL</string>

@@ -69,6 +69,27 @@
         <item name="android:fontFamily">@font/roboto_light</item>
     </style>
 
+    <style name="Text.Tweet" parent="Text"/>
+
+    <style name="Text.Tweet.Body" parent="Text.Tweet">
+        <item name="android:textColor">@color/body_text</item>
+        <item name="android:textSize">@dimen/text_body_default</item>
+        <item name="android:fontFamily">@font/roboto_light</item>
+    </style>
+
+    <style name="Text.Tweet.Title" parent="Text.Tweet">
+        <item name="android:textColor">@color/body_text</item>
+        <item name="android:textSize">@dimen/text_tweet_title</item>
+        <item name="android:fontFamily">@font/roboto_light</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Text.Tweet.Subtitle" parent="Text.Tweet">
+        <item name="android:textColor">@color/subtitle_text</item>
+        <item name="android:textSize">@dimen/text_tweet_subtitle</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+    </style>
+
     <!--widget-->
     <style name="TextInputLayout">
         <item name="hintTextAppearance">@style/TextFloatLabelAppearance</item>

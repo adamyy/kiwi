@@ -10,7 +10,7 @@ import android.view.Window
 abstract class FullScreenDialogFragment: DialogFragment() {
 
     companion object {
-        val TAG = FullScreenDialogFragment::class.simpleName
+        const val TAG = "FullScreenDialogFragment"
     }
 
     protected var isActive: Boolean = false

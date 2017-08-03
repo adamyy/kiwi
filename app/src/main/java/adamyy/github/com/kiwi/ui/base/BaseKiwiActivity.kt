@@ -17,13 +17,13 @@ import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
 import javax.inject.Inject
 
-abstract class BaseKiwiActivity<in V : BaseView, P : BasePresenter<V>, T : ViewDataBinding> : AppCompatActivity(), HasSupportFragmentInjector, BaseView {
+abstract class BaseKiwiActivity<in V : BaseView, P : BasePresenter<V>, B : ViewDataBinding> : AppCompatActivity(), HasSupportFragmentInjector, BaseView {
 
     @Inject protected lateinit var presenter: P
 
-    var fullScreenDialog: FullScreenDialogFragment? = null
+    protected var fullScreenDialog: FullScreenDialogFragment? = null
 
-    protected lateinit var binding: T
+    protected lateinit var binding: B
 
     @Inject lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
 
@@ -34,7 +34,7 @@ abstract class BaseKiwiActivity<in V : BaseView, P : BasePresenter<V>, T : ViewD
     @CallSuper override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AndroidInjection.inject(this)
-        binding = DataBindingUtil.setContentView<T>(this, getLayoutRes())
+        binding = DataBindingUtil.setContentView<B>(this, getLayoutRes())
         presenter.bindView(this as V)
     }
 

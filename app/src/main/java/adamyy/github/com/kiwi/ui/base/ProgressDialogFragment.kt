@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.annotation.StringRes
 import android.support.v4.app.FragmentActivity
+import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,9 +14,9 @@ import android.view.ViewGroup
 class ProgressDialogFragment : FullScreenDialogFragment() {
 
     companion object {
-        val TAG = ProgressDialogFragment::class.simpleName
+        const val TAG = "ProgressDialogFragment"
 
-        private val MESSAGE_KEY = "progress_dialog_message"
+        private const val MESSAGE_KEY = "progress_dialog_message"
 
         private fun newInstance(message: Int): ProgressDialogFragment {
             val fragment = ProgressDialogFragment()
@@ -25,10 +26,9 @@ class ProgressDialogFragment : FullScreenDialogFragment() {
             return fragment
         }
 
-        fun show(activity: FragmentActivity, @StringRes message: Int = R.string.loading): ProgressDialogFragment {
+        fun show(activity: AppCompatActivity, @StringRes message: Int = R.string.loading): ProgressDialogFragment {
             val dialog = newInstance(message)
             dialog.show(activity.supportFragmentManager, FullScreenDialogFragment.TAG)
-            if (activity is BaseKiwiActivity<*, *, *>) activity.fullScreenDialog = dialog
             return dialog
         }
     }

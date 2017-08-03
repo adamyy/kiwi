@@ -5,8 +5,8 @@ import adamyy.github.com.kiwi.R
 import adamyy.github.com.kiwi.data.source.network.auth.SessionManager
 import adamyy.github.com.kiwi.ui.base.UrlFragment
 import android.net.Uri
+import android.view.MenuItem
 import android.support.annotation.StringRes
-import android.util.Log
 import android.webkit.WebView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -17,12 +17,7 @@ import adamyy.github.com.kiwi.data.source.network.auth.SessionManager.OAuthAcces
 class AuthFragment : UrlFragment() {
 
     companion object {
-        val TAG = AuthFragment::class.simpleName
-
-        fun init(): AuthFragment {
-            Log.d(TAG, "init")
-            return AuthFragment()
-        }
+        const val TAG = "AuthFragment"
     }
 
     @Inject lateinit var sessionManager: SessionManager
@@ -30,6 +25,16 @@ class AuthFragment : UrlFragment() {
     override fun onResume() {
         super.onResume()
         loadAuthentication()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when (item?.itemId) {
+            android.R.id.home -> {
+                getDelegate()?.pressBack()
+                false
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     // region UrlFragment
@@ -49,35 +54,35 @@ class AuthFragment : UrlFragment() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { state ->
                     state.apply {
-                        if (isError) getDelegate().onAuthFailed(info)
+                        if (isError) getDelegate()?.onAuthFailed(info)
                         when (state) {
                             OAuthAccessStatus.POST_ACCESS -> showLoading(true)
-                            OAuthAccessStatus.ACCESS_TOKEN_OK -> getDelegate().onAuthSuccess()
+                            OAuthAccessStatus.ACCESS_TOKEN_OK -> getDelegate()?.onAuthSuccess()
                         }
                     }
                 }.attach()
     }
 
     override fun onUrlLoaded(url: String?) {
+        setToolbarTitle(R.string.sign_in_with_twitter)
         showLoading(false)
     }
 
     override fun onLoadingError() {
-        if (isVisible) {
-            getDelegate().onAuthFailed(R.string.sign_in_error_load_url)
-        }
+        getDelegate()?.onAuthFailed(R.string.sign_in_error_load_url)
     }
 
     // endregion
 
     private fun loadAuthentication() {
+        setToolbarTitle(R.string.loading)
         sessionManager.getAuthRequest()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe { state ->
                     when (state) {
                         OAuthRequestStatus.POST_REQUEST -> showLoading(true)
-                        OAuthRequestStatus.REQUEST_TOKEN_DENIED -> getDelegate().onAuthFailed(state.info)
+                        OAuthRequestStatus.REQUEST_TOKEN_DENIED -> getDelegate()?.onAuthFailed(state.info)
                         OAuthRequestStatus.REQUEST_TOKEN_OK -> {
                             showLoading(false)
                             loadUrlWithTimeout(sessionManager.getRequestToken()!!.authenticationUrl)
@@ -86,10 +91,15 @@ class AuthFragment : UrlFragment() {
                 }.attach()
     }
 
-    fun getDelegate(): Delegate = activity as Delegate
+    private fun setToolbarTitle(@StringRes title: Int) {
+        binding.toolbarTitle.setText(title)
+    }
+
+    fun getDelegate(): Delegate? = activity as Delegate?
 
     interface Delegate {
         fun onAuthSuccess()
         fun onAuthFailed(@StringRes message: Int = R.string.sign_in_error_generic)
+        fun pressBack()
     }
 }

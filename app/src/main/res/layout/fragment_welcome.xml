@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data class="WelcomeBinding"/>
 
@@ -14,68 +13,56 @@
             android:id="@+id/icon_title"
             android:layout_width="196dp"
             android:layout_height="196dp"
-            android:layout_marginTop="@dimen/margin_xlarge"
             android:src="@drawable/ic_kiwi_no_background"
+            app:layout_constraintBottom_toTopOf="@+id/greeting_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/signin_container"
+        <TextView
+            android:id="@+id/greeting_title"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            android:visibility="invisible"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_default"
+            android:fontFamily="@font/roboto_thin"
+            android:text="@string/greeting_title"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_title"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/greeting_message"
+            app:layout_constraintStart_toStartOf="@+id/greeting_message"/>
+
+        <TextView
+            android:id="@+id/greeting_message"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_default"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:layout_marginStart="@dimen/margin_large"
+            android:fontFamily="@font/roboto_regular"
+            android:text="@string/greeting_message"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_subtitle"
+            app:layout_constraintBottom_toTopOf="@+id/button_signin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <Button
+            android:id="@+id/button_signin"
+            style="@style/Button.PrimaryDark"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_xlarge"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:layout_marginStart="@dimen/margin_large"
+            android:drawableStart="@drawable/ic_twitter"
+            android:paddingLeft="@dimen/padding_default"
+            android:paddingRight="@dimen/padding_default"
+            android:paddingStart="@dimen/padding_default"
+            android:text="@string/sign_in_with_twitter"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/icon_title"
-            tools:visibility="visible">
-
-            <TextView
-                android:id="@+id/greeting_title"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_default"
-                android:layout_marginStart="@dimen/margin_large"
-                android:text="@string/greeting_title"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_title"
-                android:fontFamily="@font/roboto_thin"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/greeting_message"
-                app:layout_constraintStart_toStartOf="parent"/>
-
-            <TextView
-                android:id="@+id/greeting_message"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_default"
-                android:text="@string/greeting_message"
-                android:textColor="@color/white"
-                android:textSize="@dimen/text_subtitle"
-                android:fontFamily="@font/roboto_regular"
-                app:layout_constraintBottom_toTopOf="@+id/button_signin"
-                app:layout_constraintEnd_toEndOf="@+id/button_signin"
-                app:layout_constraintStart_toStartOf="@+id/button_signin"/>
-
-            <Button
-                android:id="@+id/button_signin"
-                style="@style/Button.PrimaryDark"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/margin_xlarge"
-                android:layout_marginEnd="@dimen/margin_large"
-                android:layout_marginStart="@dimen/margin_large"
-                android:drawableStart="@drawable/ic_twitter"
-                android:paddingLeft="@dimen/padding_default"
-                android:paddingStart="@dimen/padding_default"
-                android:text="@string/action_sign_in"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
-
-        </android.support.constraint.ConstraintLayout>
+            app:layout_constraintStart_toStartOf="parent"/>
 
     </android.support.constraint.ConstraintLayout>
 

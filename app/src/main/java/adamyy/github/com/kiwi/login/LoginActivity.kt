@@ -7,6 +7,7 @@ import adamyy.github.com.kiwi.login.auth.AuthFragment
 import adamyy.github.com.kiwi.login.welcome.WelcomeFragment
 import adamyy.github.com.kiwi.ui.common.action
 import android.support.design.widget.Snackbar
+import android.support.v4.app.FragmentTransaction
 import com.yifan.butterfly.BActivity
 import com.yifan.butterfly.Butterfly
 
@@ -14,19 +15,14 @@ import com.yifan.butterfly.Butterfly
 class LoginActivity : BaseKiwiActivity<LoginContract.View, LoginContract.Presenter, BasicBinding>(),
         LoginContract.View, WelcomeFragment.Delegate, AuthFragment.Delegate {
 
-    companion object {
-        val TAG = LoginActivity::class.simpleName
-    }
-
     override fun onResume() {
         super.onResume()
         presenter.start()
     }
 
     override fun showWelcome() {
-        val existingFragment = supportFragmentManager.findFragmentByTag(WelcomeFragment.TAG)
         supportFragmentManager.beginTransaction()
-                .replace(R.id.container, existingFragment ?: WelcomeFragment(), WelcomeFragment.TAG)
+                .replace(R.id.container, WelcomeFragment(), WelcomeFragment.TAG)
                 .commit()
     }
 
@@ -38,9 +34,9 @@ class LoginActivity : BaseKiwiActivity<LoginContract.View, LoginContract.Present
     // region WelcomeFragment#Delegate
 
     override fun startAuth() {
-        val authFragment = AuthFragment.init()
         supportFragmentManager.beginTransaction()
-                .replace(R.id.container, authFragment, AuthFragment.TAG)
+                .replace(R.id.container, AuthFragment(), AuthFragment.TAG)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                 .addToBackStack(AuthFragment.TAG)
                 .commit()
     }
@@ -58,6 +54,10 @@ class LoginActivity : BaseKiwiActivity<LoginContract.View, LoginContract.Present
         snackMessage(message, length = Snackbar.LENGTH_LONG) {
             action(R.string.retry, R.color.failure) { startAuth() }
         }
+    }
+
+    override fun pressBack() {
+        onBackPressed()
     }
 
     // endregion

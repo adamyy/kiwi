@@ -13,7 +13,7 @@ import javax.inject.Inject
 class WelcomeFragment : BaseKiwiFragment<WelcomeBinding>() {
 
     companion object {
-        val TAG = WelcomeFragment::class.simpleName
+        const val TAG = "WelcomeFragment"
     }
 
     override fun getLayoutRes(): Int = R.layout.fragment_welcome
